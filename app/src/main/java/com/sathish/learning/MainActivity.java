@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatButton addButton;
     private DBHelper dbHelper;
     private RecyclerView recyclerView;
+    private AppCompatButton viewDataButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         addButton = (AppCompatButton) findViewById(R.id.addButton);
         dbHelper = new DBHelper(MainActivity.this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclearview);
+        viewDataButton = (AppCompatButton) findViewById(R.id.viewDataButton);
         displayData();
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +53,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        viewDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewContactsDetails();
+            }
+        });
+    }
 
+    private void viewContactsDetails() {
+        Intent intent = new Intent(this, MyDataActivity.class);
+        startActivity(intent);
     }
 
     private void displayData() {

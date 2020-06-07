@@ -36,11 +36,18 @@
         android:layout_below="@+id/phone"
         android:padding="10dp"
         android:text="Add To Contact" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/viewDataButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addButton"
+        android:padding="10dp"
+        android:text="View Contact" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclearview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addButton"
+        android:layout_below="@+id/viewDataButton"
         android:layout_marginTop="10dp" />
 </RelativeLayout>

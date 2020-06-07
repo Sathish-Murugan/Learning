@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
+    private String TAG = DBHelper.class.getSimpleName();
     public static final String DATABASE_NAME = "learning.db";
 
     public DBHelper(Context context) {
@@ -53,6 +55,25 @@ public class DBHelper extends SQLiteOpenHelper {
             array_list.add(contact);
             res.moveToNext();
         }
+        return array_list;
+    }
+
+    public List<ContactsDetails> getAllCotactsWithblaer(int blancer) {
+        List<ContactsDetails> array_list = new ArrayList<ContactsDetails>();
+
+        //hp = new HashMap();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from contacts LIMIT 10 OFFSET" + " " + blancer, null);
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false) {
+            ContactsDetails contact = new ContactsDetails();
+            contact.setName(res.getString(res.getColumnIndex("name")));
+            contact.setPhoneNumber(res.getString(res.getColumnIndex("phone")));
+            array_list.add(contact);
+            res.moveToNext();
+        }
+        Log.i(TAG, "getAllCotactsWithblaer: "+array_list);
         return array_list;
     }
 }
